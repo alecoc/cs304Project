@@ -15,7 +15,7 @@ import java.awt.event.*;
  * This class implements a graphical login window and a simple text
  * interface for interacting with the branch table 
  */ 
-public class DataClass implements ActionListener
+public class RecommendedMethods implements ActionListener
 {
     // command line reader 
     private BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
@@ -34,7 +34,7 @@ public class DataClass implements ActionListener
     /*
      * constructs login window and loads JDBC driver
      */ 
-    public DataClass()
+    public RecommendedMethods()
     {
       mainFrame = new JFrame("User Login");
 
@@ -514,6 +514,6 @@ public class DataClass implements ActionListener
  
     public static void main(String args[])
     {
-      DataClass dc = new DataClass();
+      RecommendedMethods dc = new RecommendedMethods();
     }
 }
