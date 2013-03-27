@@ -1,75 +1,75 @@
 CREATE TABLE Borrower(
-      bid INT,
-      password INT,
-      name NVARCHAR(30),
-      address NVARCHAR(40),
-      phone INT,
-      emailAddress NVARCHAR(40),
-      sinOrStNo INT,
-      expiryDate INT,
-      type NVARCHAR(20),
+      bid int NOT NULL,
+      password int,
+      name varchar(30),
+      address varchar(40),
+      phone int,
+      emailAddress varchar(40),
+      sinOrStNo int,
+      expiryDate int,
+      type varchar(20),
       PRIMARY KEY(bid)
 )
 GO
 CREATE TABLE BorrowerType (
-      type NVARCHAR(20),
-      bookTimeLimit INT,
+      type varchar(20 NOT NULL,
+      bookTimeLimit int,
       PRIMARY KEY(type)
 )
 GO
 CREATE TABLE Book (
-      callNumber INT,
-      isbn INT,
-      title NVARCHAR(20),
-      mainAuthor NVARCHAR(30),
-      publisher NVARCHAR(20),
-      year INT,
+      callNumber int NOT NULL,
+      isbn int,
+      title varchar(20),
+      mainAuthor varchar(30),
+      publisher varchar(20),
+      year int,
       PRIMARY KEY(callNumber)
 )
 GO
 CREATE TABLE HasAuthor (
-     callNumber INT,
-     name NVARCHAR(30),
+     callNumber int NOT NULL,
+     name varchar(30) NOT NULL,
      PRIMARY KEY(callNumber, name)
 )
 GO
 CREATE TABLE HasSubject (
-     callNumber INT,
-     subject NVARCHAR(20),
+     callNumber int NOT NULL,
+     subject varchar(20) NOT NULL,
      PRIMARY KEY(callNumber, subject)
 )
 GO
 CREATE TABLE BookCopy (
-     callNumber INT,
-     copyNo INT,
-     status NVARCHAR,
+     callNumber int NOT NULL,
+     copyNo int NOT NULL,
+     status varchar,
      PRIMARY KEY (callNumber, copyNo)
 )
 GO
 CREATE TABLE HoldRequest (
-     hid INT,
-     bid INT,
-     callNumber INT,
-     issuedDate NVARCHAR(20),
+     hid int NOT NULL,
+     bid int,
+     callNumber int,
+     issuedDate varchar(20),
      PRIMARY KEY (hid)
 )
 GO
 CREATE TABLE Borrowing (
-     borid INT,
-     bid INT,
-     callNumber INT,
-     copyNo INT,
-     outDate NVARCHAR(20),
-     inDate NVARCHAR(20),
+     borid int NOT NULL,
+     bid int,
+     callNumber int,
+     copyNo int,
+     outDate varchar(20),
+     inDate varchar(20),
      PRIMARY KEY(borid)
 )
 GO
 CREATE TABLE Fine (
-     fid INT,
-     amount FLOAT,
-     issuedDate NVARCHAR(20)
-     paidDate NVARCHAR(20)
-     borid INT,
+     fid int NOT NULL,
+     amount float,
+     issuedDate varchar(20)
+     paidDate varchar(20)
+     borid int,
      PRIMARY KEY(fid)
 );
 

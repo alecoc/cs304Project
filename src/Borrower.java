@@ -1,3 +1,7 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 
 public class Borrower {
 	/***
@@ -13,5 +17,38 @@ public class Borrower {
     Pay a fine.
 
 ***/
-	
-}
+	    private int Bid;
+	    private int Password;
+	    private String Name;
+	    private String Address;
+	    private int Phone;
+	    private String Email;
+	    private int SinOrStNo;
+	    private int ExpiryDate;
+	    private String Type;
+	    private List ListOfBooks= new ArrayList();
+	    List<Map.Entry<String,Integer>> Book= new ArrayList<>();
+	    
+
+	    public Borrower (int bid, int password, String name, String address, int phone, String email, int sinOrStNo, int expiryDate, String type){
+	        Bid= bid;
+	        Password= password;
+	        Name= name;
+	        Address= address;
+	        Phone= phone;
+	        Email= email;
+	        SinOrStNo= sinOrStNo;
+	        ExpiryDate= expiryDate;
+	        Type= type;
+	    }
+	    
+	    public void getNumberOfBooks(int bid){}
+	    
+	    public List search(String keyword){
+	    	
+			return ListOfBooks;
+			}
+	    
+	    
+
+	}
