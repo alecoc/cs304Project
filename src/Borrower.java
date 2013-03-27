@@ -17,17 +17,16 @@ public class Borrower {
     Pay a fine.
 
 ***/
-	    private int Bid;
-	    private int Password;
-	    private String Name;
-	    private String Address;
-	    private int Phone;
-	    private String Email;
-	    private int SinOrStNo;
-	    private int ExpiryDate;
-	    private String Type;
-	    private List ListOfBooks= new ArrayList();
-	    List<Map.Entry<String,Integer>> Book= new ArrayList<>();
+	    public int Bid;
+	    public int Password;
+	    public String Name;
+	    public String Address;
+	    public int Phone;
+	    public String Email;
+	    public int SinOrStNo;
+	    public int ExpiryDate;
+	    public String Type;
+	    public List<Book> ListOfBooks= new ArrayList();
 	    
 
 	    public Borrower (int bid, int password, String name, String address, int phone, String email, int sinOrStNo, int expiryDate, String type){
