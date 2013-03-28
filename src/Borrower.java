@@ -8,10 +8,10 @@ public class Borrower {
     DONE: Search for books using keyword search on titles, authors and subjects. The result is a list of books that 
     match the search together with the number of copies that are in and out.
     
-    Check his/her account. The system will display the items the borrower has currently borrowed and not yet 
+    PARTIAL: Check his/her account. The system will display the items the borrower has currently borrowed and not yet 
     returned, any outstanding fines and the hold requests that have been placed by the borrower.
     
-    Place a hold request for a book that is out. When the item is returned, the system sends an email to the 
+    DONE: Place a hold request for a book that is out. When the item is returned, the system sends an email to the 
     borrower and informs the library clerk to keep the book out of the shelves.
     
     Pay a fine.
@@ -26,7 +26,8 @@ public class Borrower {
 	    public int SinOrStNo;
 	    public int ExpiryDate;
 	    public String Type;
-	    public List<Book> ListOfBooks= new ArrayList<Book>();
+	    public List<Book> ListOfBooks= new ArrayList<Book>(); //list of books throughout the library
+	    public List<Book> BorrowerBooks= new ArrayList<Book>(); //list of books in possession of the borrower
 	    
 
 	    public Borrower (int bid, int password, String name, String address, int phone, String email, int sinOrStNo, int expiryDate, String type){
@@ -61,6 +62,16 @@ public class Borrower {
 	    	}
 	    	
 	    	return subsetOfBooks;
+	    }
+	    
+	    public List<Book> checkAccStatus(Borrower borrower){
+	    	List<Book> bookList = BorrowerBooks;
+	    	
+	    	return bookList; //needs to return fines, hold requests, as well
+	    }
+	    
+	    public void placeHoldRequest(Book book){
+	    	book.status=0;
 	    }
 
 	}
