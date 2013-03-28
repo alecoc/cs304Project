@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class Borrower {
 	/***
-    Search for books using keyword search on titles, authors and subjects. The result is a list of books that 
+    DONE: Search for books using keyword search on titles, authors and subjects. The result is a list of books that 
     match the search together with the number of copies that are in and out.
     
     Check his/her account. The system will display the items the borrower has currently borrowed and not yet 
@@ -26,7 +26,7 @@ public class Borrower {
 	    public int SinOrStNo;
 	    public int ExpiryDate;
 	    public String Type;
-	    public List<Book> ListOfBooks= new ArrayList();
+	    public List<Book> ListOfBooks= new ArrayList<Book>();
 	    
 
 	    public Borrower (int bid, int password, String name, String address, int phone, String email, int sinOrStNo, int expiryDate, String type){
@@ -43,11 +43,24 @@ public class Borrower {
 	    
 	    public void getNumberOfBooks(int bid){}
 	    
-	    public List search(String keyword){
-	    	
-			return ListOfBooks;
+	    public List<Book> search(String keyword){
+	    	//conduct a search on all book titles, mainAuthors, and subjects using the keyword
+	    	List<Book> searchResults = new ArrayList<Book>(); //this is the output list of books
+	    	List<Book> weededBookList = bookStatus(searchResults);
+			return weededBookList;
 			}
 	    
-	    
+	    public List<Book> bookStatus(List<Book> searchResults){
+	    	List<Book> bookList = searchResults;
+	    	List<Book> subsetOfBooks = new ArrayList<Book>();
+	    	
+	    	for (Book b : bookList){
+	    		if(b.status==1){
+	    			subsetOfBooks.add(b);
+	    		}
+	    	}
+	    	
+	    	return subsetOfBooks;
+	    }
 
 	}
