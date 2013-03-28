@@ -26,11 +26,12 @@ public class Borrower {
 	    public int SinOrStNo;
 	    public int ExpiryDate;
 	    public String Type;
+	    public int accumulatedFines;
 	    public List<Book> ListOfBooks= new ArrayList<Book>(); //list of books throughout the library
 	    public List<Book> BorrowerBooks= new ArrayList<Book>(); //list of books in possession of the borrower
 	    
 
-	    public Borrower (int bid, int password, String name, String address, int phone, String email, int sinOrStNo, int expiryDate, String type){
+	    public Borrower (int bid, int password, String name, String address, int phone, String email, int sinOrStNo, int expiryDate, String type, List<Book> borrowerBooks, int fineTotal){
 	        Bid= bid;
 	        Password= password;
 	        Name= name;
@@ -40,6 +41,8 @@ public class Borrower {
 	        SinOrStNo= sinOrStNo;
 	        ExpiryDate= expiryDate;
 	        Type= type;
+	        BorrowerBooks= borrowerBooks;
+	        accumulatedFines= fineTotal;
 	    }
 	    
 	    public void getNumberOfBooks(int bid){}
@@ -70,8 +73,18 @@ public class Borrower {
 	    	return bookList; //needs to return fines, hold requests, as well
 	    }
 	    
-	    public void placeHoldRequest(Book book){
+	    public void placeHoldRequest(Book book, Borrower borrower){
 	    	book.status=0;
+	    	sendEmail(borrower, book);
+	    }
+	    
+	    public void payFine(Borrower borrower){
+	    	borrower.accumulatedFines= 0;
+	    }
+	    
+	    public void sendEmail(Borrower borrower, Book book){
+	    	String borrowerEmail= borrower.Email;
+	    	//send an email to the borrower about the book
 	    }
 
 	}
