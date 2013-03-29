@@ -477,13 +477,13 @@ public class GUI implements ActionListener
 				e1.printStackTrace();
 			}
 			try {
-				ResultSet rs = stmt.executeQuery("SELECT title,author,subject FROM Book WHERE title LIKE '%" + searchField.getText() + "%' OR author LIKE '%" + searchField.getText() + "%' OR subject LIKE '%" + searchField.getText() + "%'");
+				ResultSet rs = stmt.executeQuery("SELECT title,mainAuthor,subject,callNumber FROM Book WHERE title LIKE '%" + searchField.getText() + "%' OR mainAuthor LIKE '%" + searchField.getText() + "%' OR subject LIKE '%" + searchField.getText() + "%'");
 				//put the resulting book list into variable bookList
 				
 
 				while ( rs.next() ) {
-					String sample = rs.getString("title");
-					System.out.println(sample);
+					int callNumber = rs.getInt("callNumber");
+					System.out.println(callNumber);
 				}
 
 			} catch (SQLException e1) {
