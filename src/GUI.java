@@ -1,6 +1,8 @@
 
 // We need to import the java.sql package to use JDBC
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 // for reading from the command line
 import java.io.*;
@@ -18,6 +20,7 @@ import java.awt.event.*;
  */ 
 public class GUI implements ActionListener
 {
+	public List<Book> bookList = new ArrayList<Book>();
 	// command line reader 
 	private BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 
@@ -31,7 +34,8 @@ public class GUI implements ActionListener
 	public JPasswordField passwordField;
 	public JTextField searchField;
 	public JFrame mainFrame;
-
+	
+	
 
 	/*
 	 * constructs login window and loads JDBC driver
@@ -39,9 +43,10 @@ public class GUI implements ActionListener
 	public GUI()
 	{
 		mainFrame = new JFrame("User Login");
+		String username = "ora_e4q7";
+		String password = "a23056096";
+		connect(username, password);
 
-		JLabel usernameLabel = new JLabel("Enter username: ");
-		JLabel passwordLabel = new JLabel("Enter password: ");
 		JLabel searchLabel = new JLabel("Search: ");
 
 		usernameField = new JTextField(10);
@@ -50,7 +55,6 @@ public class GUI implements ActionListener
 
 		searchField = new JTextField(30);
 
-		JButton loginButton = new JButton("Log In");
 		JButton searchButton = new JButton("Search");
 
 		JPanel contentPane = new JPanel();
@@ -84,40 +88,10 @@ public class GUI implements ActionListener
 		gb.setConstraints(searchButton, c);
 		contentPane.add(searchButton);
 
-		// place the username label 
-		c.gridwidth = GridBagConstraints.RELATIVE;
-		c.insets = new Insets(10, 10, 5, 0);
-		gb.setConstraints(usernameLabel, c);
-		contentPane.add(usernameLabel);
+	
 
-		// place the text field for the username 
-		c.gridwidth = GridBagConstraints.REMAINDER;
-		c.insets = new Insets(10, 0, 5, 10);
-		gb.setConstraints(usernameField, c);
-		contentPane.add(usernameField);
+		// register search field and OK button with action event handler
 
-		// place password label
-		c.gridwidth = GridBagConstraints.RELATIVE;
-		c.insets = new Insets(0, 10, 10, 0);
-		gb.setConstraints(passwordLabel, c);
-		contentPane.add(passwordLabel);
-
-		// place the password field 
-		c.gridwidth = GridBagConstraints.REMAINDER;
-		c.insets = new Insets(0, 0, 10, 10);
-		gb.setConstraints(passwordField, c);
-		contentPane.add(passwordField);
-
-		// place the login button
-		c.gridwidth = GridBagConstraints.REMAINDER;
-		c.insets = new Insets(5, 10, 10, 10);
-		c.anchor = GridBagConstraints.CENTER;
-		gb.setConstraints(loginButton, c);
-		contentPane.add(loginButton);
-
-		// register password field and OK button with action event handler
-		passwordField.addActionListener(this);
-		loginButton.addActionListener(this);
 		searchButton.addActionListener(this);
 
 		// anonymous inner class for closing the window
@@ -159,7 +133,7 @@ public class GUI implements ActionListener
 	/*
 	 * connects to Oracle database named ug using user supplied username and password
 	 */ 
-	private boolean connect(String username, String password)
+	public boolean connect(String username, String password)
 	{
 		String connectURL = "jdbc:oracle:thin:@dbhost.ugrad.cs.ubc.ca:1522:ug"; 
 
@@ -176,22 +150,15 @@ public class GUI implements ActionListener
 			return false;
 		}
 	}
-
+	
 
 	/*
 	 * event handler for login window
 	 */ 
 	public void actionPerformed(ActionEvent e) 
 	{
-		if ( connect(usernameField.getText(), String.valueOf(passwordField.getPassword())) )
-		{
-			// if the username and password are valid, 
-			// remove the login window and display a text menu 
-			mainFrame.dispose();
-			showMenu();     
-		}
+		
 		if (searchField.getText()!=""){
-			//query the ODBC database for it in columns title author subject
 			Statement stmt = null;
 			try {
 				stmt = con.createStatement();
@@ -199,7 +166,15 @@ public class GUI implements ActionListener
 				e1.printStackTrace();
 			}
 			try {
-				ResultSet rs = stmt.executeQuery("SELECT title,author,subject FROM Table WHERE title LIKE 'searchField.getText()' OR author LIKE 'searchField.getText()' OR subject LIKE 'searchField.getText()'");
+				ResultSet rs = stmt.executeQuery("SELECT title,author,subject FROM Book WHERE title LIKE '%" + searchField.getText() + "%' OR author LIKE '%" + searchField.getText() + "%' OR subject LIKE '%" + searchField.getText() + "%'");
+				//put the resulting book list into variable bookList
+				
+
+				while ( rs.next() ) {
+					String sample = rs.getString("title");
+					System.out.println(sample);
+				}
+
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
