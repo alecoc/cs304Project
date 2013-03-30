@@ -51,6 +51,9 @@ CREATE TABLE BookCopy (
      status int,
      PRIMARY KEY (callNumber, copyNo)
 );
+
+INSERT INTO BookCopy VALUES ( 1, 5, 1 );
+
 CREATE TABLE HoldRequest (
      hid int NOT NULL,
      bid int,

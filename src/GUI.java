@@ -85,7 +85,7 @@ public class GUI implements ActionListener
 
 		searchField = new JTextField(30);
 
-//------------------------------------------------------------------------------		
+		//------------------------------------------------------------------------------		
 		JButton searchButton = new JButton("Search");
 		searchButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -110,8 +110,8 @@ public class GUI implements ActionListener
 				}
 			}
 		});
-		
-//--------------------------------------------------------------------------------		
+
+		//--------------------------------------------------------------------------------		
 
 		JPanel contentPane = new JPanel();
 		contentPane.setBackground(Color.LIGHT_GRAY);
@@ -325,8 +325,8 @@ public class GUI implements ActionListener
 		gbc_typeField.gridy = 11;
 		contentPane.add(typeField, gbc_typeField);
 		typeField.setColumns(10);
-		
-//---------------------------------------------------------------------------		
+
+		//---------------------------------------------------------------------------		
 
 		btnAddBorrower = new JButton("Add Borrower");
 		btnAddBorrower.addActionListener(new ActionListener() {
@@ -355,9 +355,9 @@ public class GUI implements ActionListener
 				}
 			}
 		});
-		
-//------------------------------------------------------------------------------		
-		
+
+		//------------------------------------------------------------------------------		
+
 		GridBagConstraints gbc_btnAddBorrower = new GridBagConstraints();
 		gbc_btnAddBorrower.insets = new Insets(0, 0, 5, 0);
 		gbc_btnAddBorrower.gridx = 2;
@@ -388,7 +388,7 @@ public class GUI implements ActionListener
 		contentPane.add(accountID, gbc_accountID);
 		accountID.setColumns(10);
 
-//---------------------------------------------------------------------
+		//---------------------------------------------------------------------
 		btnCheckAccount = new JButton("Check Account");
 		btnCheckAccount.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -430,8 +430,8 @@ public class GUI implements ActionListener
 			}
 		});
 
-//--------------------------------------------------------------------------		
-		
+		//--------------------------------------------------------------------------		
+
 		GridBagConstraints gbc_btnCheckAccount = new GridBagConstraints();
 		gbc_btnCheckAccount.insets = new Insets(0, 0, 5, 0);
 		gbc_btnCheckAccount.gridx = 2;
@@ -462,15 +462,52 @@ public class GUI implements ActionListener
 		contentPane.add(holdBookName, gbc_holdBookName);
 		holdBookName.setColumns(10);
 
-//-------------------------------------------------------------------		
+		//-------------------------------------------------------------------		
 		btnPlaceHold = new JButton("Place Hold");
 		btnPlaceHold.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				System.out.println("hello");
+				if (searchField.getText()!=""){ //searching for a book and retrieving the call number
+					Statement stmt = null;
+					Statement stmt2 = null;
+					int callNumber = 5;
+					try {
+						stmt = con.createStatement();
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+					}
+					try {
+						ResultSet rs = stmt.executeQuery("SELECT title,mainAuthor,subject,callNumber FROM Book WHERE title LIKE '%" 
+								+ searchField.getText() + "%' OR mainAuthor LIKE '%" + searchField.getText() + "%' OR subject LIKE '%" 
+								+ searchField.getText() + "%'");
+
+						while ( rs.next() ) {
+							callNumber = rs.getInt("callNumber");
+				
+						}
+
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+					}
+					
+					//at this point, call number has been found for the book, now we must change the status to on-hold
+					
+					try {
+						stmt2 = con.createStatement();
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+					}
+					
+					try {
+						stmt2.executeQuery("UPDATE BookCopy SET status=0 WHERE callNumber= " + callNumber + "");
+
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+					}
+				}
 			}
 		});
-//--------------------------------------------------------------------		
-		
+		//--------------------------------------------------------------------		
+
 		GridBagConstraints gbc_btnPlaceHold = new GridBagConstraints();
 		gbc_btnPlaceHold.insets = new Insets(0, 0, 5, 0);
 		gbc_btnPlaceHold.gridx = 2;
