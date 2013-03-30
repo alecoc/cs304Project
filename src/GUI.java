@@ -64,6 +64,8 @@ public class GUI implements ActionListener
 	private JTextField finesAmount;
 	private JLabel lblAmount;
 	private JButton btnPayFines;
+	private JTextArea finesBorrowerID;
+	private JLabel lblBorrowerid;
 
 
 
@@ -121,6 +123,7 @@ public class GUI implements ActionListener
 		// layout components using the GridBag layout manager
 
 		GridBagLayout gb = new GridBagLayout();
+		gb.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0};
 		gb.columnWeights = new double[]{1.0, 1.0, 0.0};
 		GridBagConstraints c = new GridBagConstraints();
 
@@ -337,18 +340,18 @@ public class GUI implements ActionListener
 				} catch (SQLException e1) {
 					e1.printStackTrace();
 				}
-				String bid = IDField.getText();
-				String password = passwirdField.getText();
+				int bid = Integer.parseInt(IDField.getText());
+				int password = Integer.parseInt(passwirdField.getText());
 				String name = nameField.getText();
 				String address = addressField.getText();
-				String phone = phoneField.getText();
+				int phone = Integer.parseInt(phoneField.getText());
 				String email = emailField.getText();
-				String sinStudent = sinStudentField.getText();
-				String expiry = expiryField.getText();
+				int sinStudent = Integer.parseInt(sinStudentField.getText());
+				int expiry = Integer.parseInt(expiryField.getText());
 				String type = typeField.getText();
 
 				try {
-					stmt.executeUpdate("INSERT INTO Borrower VALUES (" + bid + "," + password + "," + name + "," + address + "," + phone + "," + email + "," + sinStudent + "," + expiry + "," + type + ")");
+					stmt.executeUpdate("INSERT INTO Borrower VALUES (" + bid + "," + password + ",'" + name + "','" + address + "'," + phone + ",'" + email + "'," + sinStudent + "," + expiry + ",'" + type + "')");
 
 				} catch (SQLException e1) {
 					e1.printStackTrace();
@@ -482,21 +485,21 @@ public class GUI implements ActionListener
 
 						while ( rs.next() ) {
 							callNumber = rs.getInt("callNumber");
-				
+
 						}
 
 					} catch (SQLException e1) {
 						e1.printStackTrace();
 					}
-					
+
 					//at this point, call number has been found for the book, now we must change the status to on-hold
-					
+
 					try {
 						stmt2 = con.createStatement();
 					} catch (SQLException e1) {
 						e1.printStackTrace();
 					}
-					
+
 					try {
 						stmt2.executeQuery("UPDATE BookCopy SET status=0 WHERE callNumber= " + callNumber + "");
 
@@ -523,7 +526,7 @@ public class GUI implements ActionListener
 
 		lblAmount = new JLabel("Amount");
 		GridBagConstraints gbc_lblAmount = new GridBagConstraints();
-		gbc_lblAmount.insets = new Insets(0, 0, 0, 5);
+		gbc_lblAmount.insets = new Insets(0, 0, 5, 5);
 		gbc_lblAmount.anchor = GridBagConstraints.EAST;
 		gbc_lblAmount.gridx = 0;
 		gbc_lblAmount.gridy = 17;
@@ -531,18 +534,77 @@ public class GUI implements ActionListener
 
 		finesAmount = new JTextField();
 		GridBagConstraints gbc_finesAmount = new GridBagConstraints();
-		gbc_finesAmount.insets = new Insets(0, 0, 0, 5);
+		gbc_finesAmount.insets = new Insets(0, 0, 5, 5);
 		gbc_finesAmount.fill = GridBagConstraints.HORIZONTAL;
 		gbc_finesAmount.gridx = 1;
 		gbc_finesAmount.gridy = 17;
 		contentPane.add(finesAmount, gbc_finesAmount);
 		finesAmount.setColumns(10);
 
-		btnPayFines = new JButton("Pay Fines");
+		btnPayFines = new JButton("Pay Fine");
+
+		//----------------------------------------------------------------------------------		
+		btnPayFines.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//1. get the borrower ID borid, and use that to access the fine table and get the amount
+				
+
+				try {
+					Statement stmt = null;
+					Statement stmt2 = null;
+					int remainingAmount = 0;
+					String borrowerID = finesBorrowerID.getText();
+					int quantity;
+					
+					stmt = con.createStatement();
+					ResultSet rs = stmt.executeQuery("SELECT fid,borid,amount FROM Fine WHERE borid=" + borrowerID + "");
+					System.out.println(borrowerID);
+					
+					while ( rs.next() ) {
+						quantity = rs.getInt("amount");
+						System.out.println("Fine amount retrieved: " + quantity);
+						
+						String amountPaid = finesAmount.getText();
+						int amountPaidInt = Integer.parseInt(amountPaid);
+						System.out.println("amountpaid: " + amountPaidInt);
+						
+						remainingAmount = quantity-amountPaidInt;
+						System.out.println("remainingAmount: " + remainingAmount);
+					}
+					
+					stmt2 = con.createStatement();
+					System.out.println("remainingAmount: " + remainingAmount);
+					stmt2.executeUpdate("UPDATE Fine SET amount=" + remainingAmount + " WHERE borid= " + borrowerID + "");
+
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+
+			}
+		});
+
+		//---------------------------------------------------------------------------	
+
 		GridBagConstraints gbc_btnPayFines = new GridBagConstraints();
+		gbc_btnPayFines.insets = new Insets(0, 0, 5, 0);
 		gbc_btnPayFines.gridx = 2;
 		gbc_btnPayFines.gridy = 17;
 		contentPane.add(btnPayFines, gbc_btnPayFines);
+
+		lblBorrowerid = new JLabel("                BorrowerID");
+		GridBagConstraints gbc_lblBorrowerid = new GridBagConstraints();
+		gbc_lblBorrowerid.insets = new Insets(0, 0, 0, 5);
+		gbc_lblBorrowerid.gridx = 0;
+		gbc_lblBorrowerid.gridy = 18;
+		contentPane.add(lblBorrowerid, gbc_lblBorrowerid);
+
+		finesBorrowerID = new JTextArea();
+		GridBagConstraints gbc_textArea = new GridBagConstraints();
+		gbc_textArea.insets = new Insets(0, 0, 0, 5);
+		gbc_textArea.fill = GridBagConstraints.BOTH;
+		gbc_textArea.gridx = 1;
+		gbc_textArea.gridy = 18;
+		contentPane.add(finesBorrowerID, gbc_textArea);
 
 
 		// anonymous inner class for closing the window

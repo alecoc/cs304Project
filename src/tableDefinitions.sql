@@ -72,12 +72,14 @@ CREATE TABLE Borrowing (
 );
 CREATE TABLE Fine (
      fid int NOT NULL,
-     amount float,
+     amount int,
      issuedDate varchar(20),
      paidDate varchar(20),
      borid int,
      PRIMARY KEY(fid)
 );
+
+INSERT INTO Fine VALUES ( 5, 15, 'Yesterday', 'Today', 25 );
 
 
 
