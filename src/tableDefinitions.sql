@@ -11,7 +11,7 @@ CREATE TABLE Borrower(
       PRIMARY KEY(bid)
 );
 
-INSERT INTO Borrower VALUES ( 1, 123, 'Alec', '1234 Vancouver', 6043101010, 'Alec@gmail.com', 23056096, 1, 'Student' );
+INSERT INTO Borrower VALUES ( 8, 123, 'Alec', '1234 Vancouver', 60431, 'Alecgmailcom', 2305, 1, 'Student' );
 
 
 CREATE TABLE BorrowerType (

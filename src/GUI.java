@@ -85,7 +85,33 @@ public class GUI implements ActionListener
 
 		searchField = new JTextField(30);
 
+//------------------------------------------------------------------------------		
 		JButton searchButton = new JButton("Search");
+		searchButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Statement stmt = null;
+				try {
+					stmt = con.createStatement();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+				try {
+					ResultSet rs = stmt.executeQuery("SELECT title,mainAuthor,subject,callNumber FROM Book WHERE title LIKE '%" 
+							+ searchField.getText() + "%' OR mainAuthor LIKE '%" + searchField.getText() + "%' OR subject LIKE '%" 
+							+ searchField.getText() + "%'");
+
+					while ( rs.next() ) {
+						int callNumber = rs.getInt("callNumber");
+						System.out.println(callNumber);
+					}
+
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+		
+//--------------------------------------------------------------------------------		
 
 		JPanel contentPane = new JPanel();
 		contentPane.setBackground(Color.LIGHT_GRAY);
@@ -299,8 +325,39 @@ public class GUI implements ActionListener
 		gbc_typeField.gridy = 11;
 		contentPane.add(typeField, gbc_typeField);
 		typeField.setColumns(10);
+		
+//---------------------------------------------------------------------------		
 
 		btnAddBorrower = new JButton("Add Borrower");
+		btnAddBorrower.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Statement stmt = null;
+				try {
+					stmt = con.createStatement();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+				String bid = IDField.getText();
+				String password = passwirdField.getText();
+				String name = nameField.getText();
+				String address = addressField.getText();
+				String phone = phoneField.getText();
+				String email = emailField.getText();
+				String sinStudent = sinStudentField.getText();
+				String expiry = expiryField.getText();
+				String type = typeField.getText();
+
+				try {
+					stmt.executeUpdate("INSERT INTO Borrower VALUES (" + bid + "," + password + "," + name + "," + address + "," + phone + "," + email + "," + sinStudent + "," + expiry + "," + type + ")");
+
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+		
+//------------------------------------------------------------------------------		
+		
 		GridBagConstraints gbc_btnAddBorrower = new GridBagConstraints();
 		gbc_btnAddBorrower.insets = new Insets(0, 0, 5, 0);
 		gbc_btnAddBorrower.gridx = 2;
@@ -331,7 +388,50 @@ public class GUI implements ActionListener
 		contentPane.add(accountID, gbc_accountID);
 		accountID.setColumns(10);
 
+//---------------------------------------------------------------------
 		btnCheckAccount = new JButton("Check Account");
+		btnCheckAccount.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Statement stmt = null;
+				String bid = accountID.getText();
+				try {
+					stmt = con.createStatement();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+				try {
+					ResultSet rs = stmt.executeQuery("SELECT bid,password,name,address,phone,emailAddress,sinOrStNo,expiryDate,type FROM Borrower WHERE bid= " + bid + "");
+
+					while ( rs.next() ) {
+						int ID = rs.getInt("bid");
+						int password = rs.getInt("password");
+						String name = rs.getString("name");
+						String address = rs.getString("address");
+						int phone = rs.getInt("phone");
+						String emailAddress = rs.getString("emailAddress");
+						int sinOrStNo = rs.getInt("sinOrStNo");
+						int expiryDate = rs.getInt("expiryDate");
+						String type = rs.getString("type");
+
+						System.out.println("ID provided: " + ID);
+						System.out.println("password: " + password);
+						System.out.println("name: " + name);
+						System.out.println("address: " + address);
+						System.out.println("phone: " + phone);
+						System.out.println("emailAddress: " + emailAddress);
+						System.out.println("sinOrStNo: " + sinOrStNo);
+						System.out.println("expiryDate: " + expiryDate);
+						System.out.println("type: " + type);
+					}
+
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+
+//--------------------------------------------------------------------------		
+		
 		GridBagConstraints gbc_btnCheckAccount = new GridBagConstraints();
 		gbc_btnCheckAccount.insets = new Insets(0, 0, 5, 0);
 		gbc_btnCheckAccount.gridx = 2;
@@ -362,7 +462,15 @@ public class GUI implements ActionListener
 		contentPane.add(holdBookName, gbc_holdBookName);
 		holdBookName.setColumns(10);
 
+//-------------------------------------------------------------------		
 		btnPlaceHold = new JButton("Place Hold");
+		btnPlaceHold.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				System.out.println("hello");
+			}
+		});
+//--------------------------------------------------------------------		
+		
 		GridBagConstraints gbc_btnPlaceHold = new GridBagConstraints();
 		gbc_btnPlaceHold.insets = new Insets(0, 0, 5, 0);
 		gbc_btnPlaceHold.gridx = 2;
@@ -399,11 +507,6 @@ public class GUI implements ActionListener
 		gbc_btnPayFines.gridy = 17;
 		contentPane.add(btnPayFines, gbc_btnPayFines);
 
-
-
-		// register search field and OK button with action event handler
-
-		searchButton.addActionListener(this);
 
 		// anonymous inner class for closing the window
 		mainFrame.addWindowListener(new WindowAdapter() 
@@ -464,12 +567,11 @@ public class GUI implements ActionListener
 
 
 	/*
-	 * event handler for login window
+	 * event handler for button press
 	 */ 
 	public void actionPerformed(ActionEvent e) 
 	{
-
-		if (searchField.getText()!=""){
+		if (searchField.getText()!=""){ //searching for a book and retrieving the call number
 			Statement stmt = null;
 			try {
 				stmt = con.createStatement();
@@ -480,8 +582,6 @@ public class GUI implements ActionListener
 				ResultSet rs = stmt.executeQuery("SELECT title,mainAuthor,subject,callNumber FROM Book WHERE title LIKE '%" 
 						+ searchField.getText() + "%' OR mainAuthor LIKE '%" + searchField.getText() + "%' OR subject LIKE '%" 
 						+ searchField.getText() + "%'");
-				//put the resulting book list into variable bookList
-
 
 				while ( rs.next() ) {
 					int callNumber = rs.getInt("callNumber");
@@ -492,31 +592,7 @@ public class GUI implements ActionListener
 				e1.printStackTrace();
 			}
 		}
-		if (nameField.getText()!=""){
-			Statement stmt = null;
-			try {
-				stmt = con.createStatement();
-			} catch (SQLException e1) {
-				e1.printStackTrace();
-			}
-			String bid = IDField.getText();
-			String password = passwirdField.getText();
-			String name = nameField.getText();
-			String address = addressField.getText();
-			String phone = phoneField.getText();
-			String email = emailField.getText();
-			String sinStudent = sinStudentField.getText();
-			String expiry = expiryField.getText();
-			String type = typeField.getText();
-			
-			try {
-				stmt.executeUpdate("INSERT INTO Borrower VALUES (" + bid + "," + password + "," + name + "," + address + "," + phone + "," + email + "," + sinStudent + "," + expiry + "," + type + ")");
-
-			} catch (SQLException e1) {
-				e1.printStackTrace();
-			}
-		}
-	}             
+	}
 
 	/*
 	 * displays simple text interface
