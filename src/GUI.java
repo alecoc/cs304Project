@@ -64,10 +64,11 @@ public class GUI implements ActionListener
 	private JTextField finesAmount;
 	private JLabel lblAmount;
 	private JButton btnPayFines;
+	
 	private JTextArea finesBorrowerID;
 	private JLabel lblBorrowerid;
 	private JLabel lblBorrowBooks;
-	private JTextField textField;
+	private JTextField BorrowBookID;
 	private JTextField Book1;
 	private JTextField Book2;
 	private JTextField Book3;
@@ -76,6 +77,7 @@ public class GUI implements ActionListener
 	private JLabel lblBookTitle_1;
 	private JLabel lblBookTitle_2;
 	private JButton btnNewButton;
+
 
 
 
@@ -641,10 +643,190 @@ public class GUI implements ActionListener
 		gbc_textArea.gridy = 18;
 		contentPane.add(finesBorrowerID, gbc_textArea);
 
+		//---------------------------------------------------------------------------	
+		
+		bCallNumber = new JLabel("Call Number");
+		GridBagConstraints gbc_bCallNumber = new GridBagConstraints();
+		gbc_lblName.insets = new Insets(0, 0, 5, 5);
+		gbc_lblName.anchor = GridBagConstraints.EAST;
+		gbc_lblName.gridx = 0;
+		gbc_lblName.gridy = 3;
+		contentPane.add(bCallNumber, gbc_bCallNumber);
 
+		bCallNumberField = new JTextField();
+		GridBagConstraints gbc_text = new GridBagConstraints();
+		gbc_textField.insets = new Insets(0, 0, 5, 5);
+		gbc_textField.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textField.gridx = 1;
+		gbc_textField.gridy = 3;
+		contentPane.add(bCallNumberField, gbc_text);
+		nameField.setColumns(10);
+
+		bIsbn = new JLabel("ISBN");
+		GridBagConstraints gbc_bIsbn = new GridBagConstraints();
+		gbc_lblPassword.insets = new Insets(0, 0, 5, 5);
+		gbc_lblPassword.anchor = GridBagConstraints.EAST;
+		gbc_lblPassword.gridx = 0;
+		gbc_lblPassword.gridy = 4;
+		contentPane.add(bIsbn, gbc_bIsbn);
+
+		bIsbnField = new JTextField();
+		GridBagConstraints gbc_text_1 = new GridBagConstraints();
+		gbc_textField_1.insets = new Insets(0, 0, 5, 5);
+		gbc_textField_1.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textField_1.gridx = 1;
+		gbc_textField_1.gridy = 4;
+		contentPane.add(bIsbnField, gbc_text_1);
+		passwirdField.setColumns(10);
+
+		bTitle = new JLabel("Title");
+		GridBagConstraints gbc_bTitle = new GridBagConstraints();
+		gbc_lblId.insets = new Insets(0, 0, 5, 5);
+		gbc_lblId.anchor = GridBagConstraints.EAST;
+		gbc_lblId.gridx = 0;
+		gbc_lblId.gridy = 5;
+		contentPane.add(bTitle, gbc_bTitle);
+
+		bTitleField = new JTextField();
+		GridBagConstraints gbc_text_2 = new GridBagConstraints();
+		gbc_textField_2.insets = new Insets(0, 0, 5, 5);
+		gbc_textField_2.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textField_2.gridx = 1;
+		gbc_textField_2.gridy = 5;
+		contentPane.add(bTitleField, gbc_text_2);
+		IDField.setColumns(10);
+		
+		bMainAuthor = new JLabel("Main Author");
+		GridBagConstraints gbc_bMainAuthor = new GridBagConstraints();
+		gbc_lblId.insets = new Insets(0, 0, 5, 5);
+		gbc_lblId.anchor = GridBagConstraints.EAST;
+		gbc_lblId.gridx = 0;
+		gbc_lblId.gridy = 6;
+		contentPane.add(bMainAuthor, gbc_bMainAuthor);
+
+		bMainAuthorField = new JTextField();
+		GridBagConstraints gbc_text_3 = new GridBagConstraints();
+		gbc_textField_2.insets = new Insets(0, 0, 5, 5);
+		gbc_textField_2.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textField_2.gridx = 1;
+		gbc_textField_2.gridy = 6;
+		contentPane.add(bMainAuthor, gbc_text_3);
+		IDField.setColumns(10);
+		
+		bPublisher = new JLabel("Title");
+		GridBagConstraints gbc_bPublisher = new GridBagConstraints();
+		gbc_lblId.insets = new Insets(0, 0, 5, 5);
+		gbc_lblId.anchor = GridBagConstraints.EAST;
+		gbc_lblId.gridx = 0;
+		gbc_lblId.gridy = 7;
+		contentPane.add(bPublisher, gbc_bPublisher);
+
+		bPublisherField = new JTextField();
+		GridBagConstraints gbc_text_4 = new GridBagConstraints();
+		gbc_textField_2.insets = new Insets(0, 0, 5, 5);
+		gbc_textField_2.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textField_2.gridx = 1;
+		gbc_textField_2.gridy = 7;
+		contentPane.add(bPublisherField, gbc_text_4);
+		IDField.setColumns(10);
+		
+		bSubject = new JLabel("Subject");
+		GridBagConstraints gbc_bSubject = new GridBagConstraints();
+		gbc_lblId.insets = new Insets(0, 0, 5, 5);
+		gbc_lblId.anchor = GridBagConstraints.EAST;
+		gbc_lblId.gridx = 0;
+		gbc_lblId.gridy = 8;
+		contentPane.add(bSubject, gbc_bSubject);
+
+		bSubjectField = new JTextField();
+		GridBagConstraints gbc_text_5 = new GridBagConstraints();
+		gbc_textField_2.insets = new Insets(0, 0, 5, 5);
+		gbc_textField_2.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textField_2.gridx = 1;
+		gbc_textField_2.gridy = 8;
+		contentPane.add(bSubjectField, gbc_text_5);
+		IDField.setColumns(10);
+		
+		bYear = new JLabel("Year");
+		GridBagConstraints gbc_bYear = new GridBagConstraints();
+		gbc_lblId.insets = new Insets(0, 0, 5, 5);
+		gbc_lblId.anchor = GridBagConstraints.EAST;
+		gbc_lblId.gridx = 0;
+		gbc_lblId.gridy = 9;
+		contentPane.add(bYear, gbc_bYear);
+
+		bYearField = new JTextField();
+		GridBagConstraints gbc_text_6 = new GridBagConstraints();
+		gbc_textField_2.insets = new Insets(0, 0, 5, 5);
+		gbc_textField_2.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textField_2.gridx = 1;
+		gbc_textField_2.gridy = 9;
+		contentPane.add(bYearField, gbc_text_6);
+		IDField.setColumns(10);
+		
+
+		bAddBook = new JButton("Add Book");
+		bAddBook.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Statement stmt = null;
+				Statement stmt2 = null;
+				Statement stmt3 = null;
+				
+				try {
+					stmt = con.createStatement();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+					
+				int callNumber = Integer.parseInt(bCallNumber.getText());
+				int isbn = Integer.parseInt(bIsbn.getText());
+				String title = bTitle.getText();
+				String mainAuthor = bMainAuthor.getText();
+				String publisher = bPublisher.getText();
+				String subject = bSubject.getText();
+				int year = Integer.parseInt(bYear.getText());
+
+				try {
+					ResultSet rs = stmt.executeQuery("SELECT CopyNumber FROM BookCopy WHERE callNumber LIKE '%" 
+							+ isbn + "%'");
+					int maxCopy = 0;
+					while ( rs.next() ) {
+						if (maxCopy < rs.getInt("CopyNumber")) {
+							maxCopy = rs.getInt("CopyNumber");
+						}
+						
+						if (maxCopy > 0) {
+							try {
+								stmt2.executeUpdate("INSERT INTO Book VALUES (" + callNumber + "," + isbn + ",'" + title + "','" + mainAuthor + "','" + publisher + "','" + subject + "'," + ")");
+
+							} catch (SQLException e1) {
+								e1.printStackTrace();
+							}
+							try {
+							stmt3.executeUpdate("INSERT INTO BookCopy VALUES (" + callNumber + "," + 1 + "," + 0 + ")");
+							} catch (SQLException e1) {
+								e1.printStackTrace();
+							}
+						} else { 
+							stmt3.executeUpdate("INSERT INTO BookCopy VALUES (" + callNumber + "," + (maxCopy+1) + "," + 0 + ")");
+						}
+			}
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+
+
+		//---------------------------------------------------------------------------
+	
+		//---------------------------------------------------------------------------	
+		
 		String yumiko = "^_^";
 		String alec = "awesome";
 		double alecawesome = 0.0;
+		
+		
 		
 		// anonymous inner class for closing the window
 		mainFrame.addWindowListener(new WindowAdapter() 
