@@ -5,10 +5,10 @@ import java.util.List;
 
 public class Librarian {
 	/***
-    DONE (Without Table Use): Adds a new book or new copy of an existing book to the library. The librarian provides the information for 
+    DONE: Adds a new book or new copy of an existing book to the library. The librarian provides the information for 
     the new book, and the system adds it to the library.
     
-    Done (Without Table USe): Generate a report with all the books that have been checked out. For each book the report shows the date 
+    Done (Without Table Use): Generate a report with all the books that have been checked out. For each book the report shows the date 
     it was checked out and the due date. 
     
     The system flags the items that are overdue. The items are ordered by the book call number.  If a subject 
@@ -29,10 +29,6 @@ public class Librarian {
 		public Date dateOut;
 		public Date dateDue;
 		
-		public Report (Book b, Date out, Date due) {
-			this.book = b;
-			this.dateOut = out;
-			this.dateDue = due;
 		}
 	}
 	
@@ -40,22 +36,6 @@ public class Librarian {
 		// Maybe make Librarian like borrower
 	}
  
-	public void addBook (Book b) {
-		// b is the book to add
-		// book is the name of each book that is compared to b to make sure you do not add redundant books
-		// Adds a book to the list if books
-		int updateDone = 0;
-		for (Book book : ListOfBooks) {
-			if (book == b) {
-				book = new Book( book.name, book.copies + 1);
-				updateDone += 1;
-			}
-		}	
-		if (updateDone == 0) {
-			ListOfBooks.add(b);
-		}
-	}  // if update is not 0 or 1 you would have a problem because that would mean there are redundant books
-	   // which would be a pre-existing error. 	
 			
 	public List<Report> BookReport() {
 		List<Report> finalReport = new ArrayList<Report>();
