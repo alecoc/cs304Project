@@ -67,7 +67,7 @@ public class GUI implements ActionListener
 	private JTextArea finesBorrowerID;
 	private JLabel lblBorrowerid;
 	private JLabel lblBorrowBooks;
-	private JTextField textField;
+	private JTextField BorrowBookID;
 	private JTextField Book1;
 	private JTextField Book2;
 	private JTextField Book3;
@@ -628,14 +628,14 @@ public class GUI implements ActionListener
 		gbc_lblBorrowerid_1.gridy = 20;
 		contentPane.add(lblBorrowerid_1, gbc_lblBorrowerid_1);
 		
-		textField = new JTextField();
-		GridBagConstraints gbc_textField1 = new GridBagConstraints();
-		gbc_textField1.insets = new Insets(0, 0, 5, 5);
-		gbc_textField1.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField1.gridx = 1;
-		gbc_textField1.gridy = 20;
-		contentPane.add(textField, gbc_textField1);
-		textField.setColumns(10);
+		BorrowBookID = new JTextField();
+		GridBagConstraints gbc_BorrowBookID = new GridBagConstraints();
+		gbc_BorrowBookID.insets = new Insets(0, 0, 5, 5);
+		gbc_BorrowBookID.fill = GridBagConstraints.HORIZONTAL;
+		gbc_BorrowBookID.gridx = 1;
+		gbc_BorrowBookID.gridy = 20;
+		contentPane.add(BorrowBookID, gbc_BorrowBookID);
+		BorrowBookID.setColumns(10);
 		
 		lblBookTitle = new JLabel("Book Title 1");
 		GridBagConstraints gbc_lblBookTitle = new GridBagConstraints();
@@ -688,17 +688,20 @@ public class GUI implements ActionListener
 		contentPane.add(Book3, gbc_Book31);
 		Book3.setColumns(10);
 		
-		btnNewButton = new JButton("Checkout Book");
+		btnNewButton = new JButton("Checkout Book ;)");
 //-------------------------------------------------------------------------------
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (searchField.getText()!=""){ //searching for a book and retrieving the call number
 					Statement stmt = null;
 					Statement stmt2 = null;
+					Statement stmt3 = null;
 					
 					String bookTitle1 = Book1.getText();
 					String bookTitle2 = Book2.getText();
 					String bookTitle3 = Book3.getText();
+					
+					String borrowerNum = BorrowBookID.getText();
 					
 					int callNumber = 5;
 					
@@ -731,6 +734,28 @@ public class GUI implements ActionListener
 
 					try {
 						stmt2.executeQuery("UPDATE BookCopy SET status=2 WHERE callNumber= " + callNumber + "");
+
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+					}
+					
+					//now attach the checked-out book to the borrower via the BID field. Create a row in Borrowing
+					
+					try {
+						stmt3 = con.createStatement();
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+					}
+					
+					int borid = 5;
+					int bid = Integer.parseInt(borrowerNum);
+					int bookNumber = callNumber;
+					int copyNumber = 1;
+					int outDate = 1;
+					int inDate = 2;
+
+					try {
+						stmt3.executeUpdate("INSERT INTO Borrowing VALUES (" + borid + "," + bid + ",'" + bookNumber + "','" + copyNumber + "'," + outDate + ",'" + inDate + "')");
 
 					} catch (SQLException e1) {
 						e1.printStackTrace();
