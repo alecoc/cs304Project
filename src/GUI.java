@@ -64,7 +64,6 @@ public class GUI implements ActionListener
 	private JTextField finesAmount;
 	private JLabel lblAmount;
 	private JButton btnPayFines;
-<<<<<<< HEAD
 	
 	private JTextArea finesBorrowerID;
 	private JLabel lblBorrowerid;
@@ -78,21 +77,24 @@ public class GUI implements ActionListener
 	private JLabel lblBookTitle_1;
 	private JLabel lblBookTitle_2;
 	private JButton btnNewButton;
+	
+	// Labels for adding books
+	private JButton bAddBook;
+	private JLabel bCallNumber;
+	private JLabel bIsbn;
+	private JLabel bTitle;
+	private JLabel bMainAuthor;
+	private JLabel bPublisher;
+	private JLabel bSubject;
+	private JLabel bYear;
+	private JTextField bCallNumberField;
+	private JTextField bIsbnField;
+	private JTextField bTitleField;
+	private JTextField bMainAuthorField;
+	private JTextField bPublisherField;
+	private JTextField bSubjectField;
+	private JTextField bYearField;
 
-=======
-	private JTextArea finesBorrowerID;
-	private JLabel lblBorrowerid;
-	private JLabel lblBorrowBooks;
-	private JTextField BorrowBookID;
-	private JTextField Book1;
-	private JTextField Book2;
-	private JTextField Book3;
-	private JLabel lblBorrowerid_1;
-	private JLabel lblBookTitle;
-	private JLabel lblBookTitle_1;
-	private JLabel lblBookTitle_2;
-	private JButton btnNewButton;
->>>>>>> branch 'master' of https://github.com/alecoc/cs304Project.git
 
 
 
@@ -128,7 +130,7 @@ public class GUI implements ActionListener
 					ResultSet rs = stmt.executeQuery("SELECT title,mainAuthor,subject,callNumber FROM Book WHERE title LIKE '%" 
 							+ searchField.getText() + "%' OR mainAuthor LIKE '%" + searchField.getText() + "%' OR subject LIKE '%" 
 							+ searchField.getText() + "%'");
-<<<<<<< HEAD
+					
 		searchButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Statement stmt = null;
@@ -154,8 +156,6 @@ public class GUI implements ActionListener
 		});
 
 		//--------------------------------------------------------------------------------		
-=======
->>>>>>> branch 'master' of https://github.com/alecoc/cs304Project.git
 
 					while ( rs.next() ) {
 						int callNumber = rs.getInt("callNumber");
@@ -178,11 +178,8 @@ public class GUI implements ActionListener
 		// layout components using the GridBag layout manager
 
 		GridBagLayout gb = new GridBagLayout();
-<<<<<<< HEAD
 		gb.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0};
-=======
 		gb.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0};
->>>>>>> branch 'master' of https://github.com/alecoc/cs304Project.git
 		gb.columnWeights = new double[]{1.0, 1.0, 0.0};
 		GridBagConstraints c = new GridBagConstraints();
 
@@ -261,21 +258,18 @@ public class GUI implements ActionListener
 		contentPane.add(lblPassword, gbc_lblPassword);
 
 		passwirdField = new JTextField();
-<<<<<<< HEAD
 		GridBagConstraints gbc_textField_1 = new GridBagConstraints();
 		gbc_textField_1.insets = new Insets(0, 0, 5, 5);
 		gbc_textField_1.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textField_1.gridx = 1;
 		gbc_textField_1.gridy = 4;
 		contentPane.add(passwirdField, gbc_textField_1);
-=======
 		GridBagConstraints gbc_Book1 = new GridBagConstraints();
 		gbc_Book1.insets = new Insets(0, 0, 5, 5);
 		gbc_Book1.fill = GridBagConstraints.HORIZONTAL;
 		gbc_Book1.gridx = 1;
 		gbc_Book1.gridy = 4;
 		contentPane.add(passwirdField, gbc_Book1);
->>>>>>> branch 'master' of https://github.com/alecoc/cs304Project.git
 		passwirdField.setColumns(10);
 
 		lblId = new JLabel("ID");
@@ -287,21 +281,18 @@ public class GUI implements ActionListener
 		contentPane.add(lblId, gbc_lblId);
 
 		IDField = new JTextField();
-<<<<<<< HEAD
 		GridBagConstraints gbc_textField_2 = new GridBagConstraints();
 		gbc_textField_2.insets = new Insets(0, 0, 5, 5);
 		gbc_textField_2.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textField_2.gridx = 1;
 		gbc_textField_2.gridy = 5;
 		contentPane.add(IDField, gbc_textField_2);
-=======
 		GridBagConstraints gbc_Book2 = new GridBagConstraints();
 		gbc_Book2.insets = new Insets(0, 0, 5, 5);
 		gbc_Book2.fill = GridBagConstraints.HORIZONTAL;
 		gbc_Book2.gridx = 1;
 		gbc_Book2.gridy = 5;
 		contentPane.add(IDField, gbc_Book2);
->>>>>>> branch 'master' of https://github.com/alecoc/cs304Project.git
 		IDField.setColumns(10);
 
 		lblAddress = new JLabel("Address");
@@ -313,21 +304,18 @@ public class GUI implements ActionListener
 		contentPane.add(lblAddress, gbc_lblAddress);
 
 		addressField = new JTextField();
-<<<<<<< HEAD
 		GridBagConstraints gbc_textField_3 = new GridBagConstraints();
 		gbc_textField_3.insets = new Insets(0, 0, 5, 5);
 		gbc_textField_3.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textField_3.gridx = 1;
 		gbc_textField_3.gridy = 6;
 		contentPane.add(addressField, gbc_textField_3);
-=======
 		GridBagConstraints gbc_Book3 = new GridBagConstraints();
 		gbc_Book3.insets = new Insets(0, 0, 5, 5);
 		gbc_Book3.fill = GridBagConstraints.HORIZONTAL;
 		gbc_Book3.gridx = 1;
 		gbc_Book3.gridy = 6;
 		contentPane.add(addressField, gbc_Book3);
->>>>>>> branch 'master' of https://github.com/alecoc/cs304Project.git
 		addressField.setColumns(10);
 
 		lblPhone = new JLabel("Phone");
@@ -632,12 +620,7 @@ public class GUI implements ActionListener
 		//----------------------------------------------------------------------------------		
 		btnPayFines.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-<<<<<<< HEAD
 				//1. get the borrower ID borid, and use that to access the fine table and get the amount
-				
-
-=======
->>>>>>> branch 'master' of https://github.com/alecoc/cs304Project.git
 				try {
 					Statement stmt = null;
 					Statement stmt2 = null;
@@ -682,7 +665,6 @@ public class GUI implements ActionListener
 
 		lblBorrowerid = new JLabel("                BorrowerID");
 		GridBagConstraints gbc_lblBorrowerid = new GridBagConstraints();
-<<<<<<< HEAD
 		gbc_lblBorrowerid.insets = new Insets(0, 0, 0, 5);
 		gbc_lblBorrowerid.gridx = 0;
 		gbc_lblBorrowerid.gridy = 18;
@@ -879,8 +861,6 @@ public class GUI implements ActionListener
 		String alec = "awesome";
 		double alecawesome = 0.0;
 		
-		
-=======
 		gbc_lblBorrowerid.insets = new Insets(0, 0, 5, 5);
 		gbc_lblBorrowerid.gridx = 0;
 		gbc_lblBorrowerid.gridy = 18;
@@ -1055,7 +1035,6 @@ public class GUI implements ActionListener
 		String yumiko = "^_^";
 		String alec = "awesome";
 		double alecawesome = 0.0;
->>>>>>> branch 'master' of https://github.com/alecoc/cs304Project.git
 		
 		// anonymous inner class for closing the window
 		mainFrame.addWindowListener(new WindowAdapter() 
