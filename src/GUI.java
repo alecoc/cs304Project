@@ -66,10 +66,6 @@ public class GUI implements ActionListener
 	private JButton btnPayFines;
 	private JTextArea finesBorrowerID;
 	private JLabel lblBorrowerid;
-
-
-	private JTextArea finesBorrowerID;
-	private JLabel lblBorrowerid;
 	private JLabel lblBorrowBooks;
 	private JTextField textField;
 	private JTextField Book1;
@@ -115,6 +111,31 @@ public class GUI implements ActionListener
 					ResultSet rs = stmt.executeQuery("SELECT title,mainAuthor,subject,callNumber FROM Book WHERE title LIKE '%" 
 							+ searchField.getText() + "%' OR mainAuthor LIKE '%" + searchField.getText() + "%' OR subject LIKE '%" 
 							+ searchField.getText() + "%'");
+		searchButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Statement stmt = null;
+				try {
+					stmt = con.createStatement();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+				try {
+					ResultSet rs = stmt.executeQuery("SELECT title,mainAuthor,subject,callNumber FROM Book WHERE title LIKE '%" 
+							+ searchField.getText() + "%' OR mainAuthor LIKE '%" + searchField.getText() + "%' OR subject LIKE '%" 
+							+ searchField.getText() + "%'");
+
+					while ( rs.next() ) {
+						int callNumber = rs.getInt("callNumber");
+						System.out.println(callNumber);
+					}
+
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+
+		//--------------------------------------------------------------------------------		
 
 					while ( rs.next() ) {
 						int callNumber = rs.getInt("callNumber");

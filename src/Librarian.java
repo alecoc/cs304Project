@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Librarian {
 	/***
-    DONE: Adds a new book or new copy of an existing book to the library. The librarian provides the information for 
+    DONE (Without Table Use): Adds a new book or new copy of an existing book to the library. The librarian provides the information for 
     the new book, and the system adds it to the library.
     
     Done (Without Table USe): Generate a report with all the books that have been checked out. For each book the report shows the date 
