@@ -64,6 +64,7 @@ public class GUI implements ActionListener
 	private JTextField finesAmount;
 	private JLabel lblAmount;
 	private JButton btnPayFines;
+<<<<<<< HEAD
 	
 	private JTextArea finesBorrowerID;
 	private JLabel lblBorrowerid;
@@ -78,6 +79,20 @@ public class GUI implements ActionListener
 	private JLabel lblBookTitle_2;
 	private JButton btnNewButton;
 
+=======
+	private JTextArea finesBorrowerID;
+	private JLabel lblBorrowerid;
+	private JLabel lblBorrowBooks;
+	private JTextField BorrowBookID;
+	private JTextField Book1;
+	private JTextField Book2;
+	private JTextField Book3;
+	private JLabel lblBorrowerid_1;
+	private JLabel lblBookTitle;
+	private JLabel lblBookTitle_1;
+	private JLabel lblBookTitle_2;
+	private JButton btnNewButton;
+>>>>>>> branch 'master' of https://github.com/alecoc/cs304Project.git
 
 
 
@@ -113,6 +128,7 @@ public class GUI implements ActionListener
 					ResultSet rs = stmt.executeQuery("SELECT title,mainAuthor,subject,callNumber FROM Book WHERE title LIKE '%" 
 							+ searchField.getText() + "%' OR mainAuthor LIKE '%" + searchField.getText() + "%' OR subject LIKE '%" 
 							+ searchField.getText() + "%'");
+<<<<<<< HEAD
 		searchButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Statement stmt = null;
@@ -138,6 +154,8 @@ public class GUI implements ActionListener
 		});
 
 		//--------------------------------------------------------------------------------		
+=======
+>>>>>>> branch 'master' of https://github.com/alecoc/cs304Project.git
 
 					while ( rs.next() ) {
 						int callNumber = rs.getInt("callNumber");
@@ -160,7 +178,11 @@ public class GUI implements ActionListener
 		// layout components using the GridBag layout manager
 
 		GridBagLayout gb = new GridBagLayout();
+<<<<<<< HEAD
 		gb.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0};
+=======
+		gb.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+>>>>>>> branch 'master' of https://github.com/alecoc/cs304Project.git
 		gb.columnWeights = new double[]{1.0, 1.0, 0.0};
 		GridBagConstraints c = new GridBagConstraints();
 
@@ -239,12 +261,21 @@ public class GUI implements ActionListener
 		contentPane.add(lblPassword, gbc_lblPassword);
 
 		passwirdField = new JTextField();
+<<<<<<< HEAD
 		GridBagConstraints gbc_textField_1 = new GridBagConstraints();
 		gbc_textField_1.insets = new Insets(0, 0, 5, 5);
 		gbc_textField_1.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textField_1.gridx = 1;
 		gbc_textField_1.gridy = 4;
 		contentPane.add(passwirdField, gbc_textField_1);
+=======
+		GridBagConstraints gbc_Book1 = new GridBagConstraints();
+		gbc_Book1.insets = new Insets(0, 0, 5, 5);
+		gbc_Book1.fill = GridBagConstraints.HORIZONTAL;
+		gbc_Book1.gridx = 1;
+		gbc_Book1.gridy = 4;
+		contentPane.add(passwirdField, gbc_Book1);
+>>>>>>> branch 'master' of https://github.com/alecoc/cs304Project.git
 		passwirdField.setColumns(10);
 
 		lblId = new JLabel("ID");
@@ -256,12 +287,21 @@ public class GUI implements ActionListener
 		contentPane.add(lblId, gbc_lblId);
 
 		IDField = new JTextField();
+<<<<<<< HEAD
 		GridBagConstraints gbc_textField_2 = new GridBagConstraints();
 		gbc_textField_2.insets = new Insets(0, 0, 5, 5);
 		gbc_textField_2.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textField_2.gridx = 1;
 		gbc_textField_2.gridy = 5;
 		contentPane.add(IDField, gbc_textField_2);
+=======
+		GridBagConstraints gbc_Book2 = new GridBagConstraints();
+		gbc_Book2.insets = new Insets(0, 0, 5, 5);
+		gbc_Book2.fill = GridBagConstraints.HORIZONTAL;
+		gbc_Book2.gridx = 1;
+		gbc_Book2.gridy = 5;
+		contentPane.add(IDField, gbc_Book2);
+>>>>>>> branch 'master' of https://github.com/alecoc/cs304Project.git
 		IDField.setColumns(10);
 
 		lblAddress = new JLabel("Address");
@@ -273,12 +313,21 @@ public class GUI implements ActionListener
 		contentPane.add(lblAddress, gbc_lblAddress);
 
 		addressField = new JTextField();
+<<<<<<< HEAD
 		GridBagConstraints gbc_textField_3 = new GridBagConstraints();
 		gbc_textField_3.insets = new Insets(0, 0, 5, 5);
 		gbc_textField_3.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textField_3.gridx = 1;
 		gbc_textField_3.gridy = 6;
 		contentPane.add(addressField, gbc_textField_3);
+=======
+		GridBagConstraints gbc_Book3 = new GridBagConstraints();
+		gbc_Book3.insets = new Insets(0, 0, 5, 5);
+		gbc_Book3.fill = GridBagConstraints.HORIZONTAL;
+		gbc_Book3.gridx = 1;
+		gbc_Book3.gridy = 6;
+		contentPane.add(addressField, gbc_Book3);
+>>>>>>> branch 'master' of https://github.com/alecoc/cs304Project.git
 		addressField.setColumns(10);
 
 		lblPhone = new JLabel("Phone");
@@ -583,9 +632,12 @@ public class GUI implements ActionListener
 		//----------------------------------------------------------------------------------		
 		btnPayFines.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+<<<<<<< HEAD
 				//1. get the borrower ID borid, and use that to access the fine table and get the amount
 				
 
+=======
+>>>>>>> branch 'master' of https://github.com/alecoc/cs304Project.git
 				try {
 					Statement stmt = null;
 					Statement stmt2 = null;
@@ -630,6 +682,7 @@ public class GUI implements ActionListener
 
 		lblBorrowerid = new JLabel("                BorrowerID");
 		GridBagConstraints gbc_lblBorrowerid = new GridBagConstraints();
+<<<<<<< HEAD
 		gbc_lblBorrowerid.insets = new Insets(0, 0, 0, 5);
 		gbc_lblBorrowerid.gridx = 0;
 		gbc_lblBorrowerid.gridy = 18;
@@ -827,6 +880,182 @@ public class GUI implements ActionListener
 		double alecawesome = 0.0;
 		
 		
+=======
+		gbc_lblBorrowerid.insets = new Insets(0, 0, 5, 5);
+		gbc_lblBorrowerid.gridx = 0;
+		gbc_lblBorrowerid.gridy = 18;
+		contentPane.add(lblBorrowerid, gbc_lblBorrowerid);
+
+		finesBorrowerID = new JTextArea();
+		GridBagConstraints gbc_textArea = new GridBagConstraints();
+		gbc_textArea.insets = new Insets(0, 0, 5, 5);
+		gbc_textArea.fill = GridBagConstraints.BOTH;
+		gbc_textArea.gridx = 1;
+		gbc_textArea.gridy = 18;
+		contentPane.add(finesBorrowerID, gbc_textArea);
+		
+		lblBorrowBooks = new JLabel("Borrow Books");
+		GridBagConstraints gbc_lblBorrowBooks = new GridBagConstraints();
+		gbc_lblBorrowBooks.insets = new Insets(0, 0, 5, 5);
+		gbc_lblBorrowBooks.gridx = 0;
+		gbc_lblBorrowBooks.gridy = 19;
+		contentPane.add(lblBorrowBooks, gbc_lblBorrowBooks);
+		
+		lblBorrowerid_1 = new JLabel("BorrowerID");
+		GridBagConstraints gbc_lblBorrowerid_1 = new GridBagConstraints();
+		gbc_lblBorrowerid_1.insets = new Insets(0, 0, 5, 5);
+		gbc_lblBorrowerid_1.anchor = GridBagConstraints.EAST;
+		gbc_lblBorrowerid_1.gridx = 0;
+		gbc_lblBorrowerid_1.gridy = 20;
+		contentPane.add(lblBorrowerid_1, gbc_lblBorrowerid_1);
+		
+		BorrowBookID = new JTextField();
+		GridBagConstraints gbc_BorrowBookID = new GridBagConstraints();
+		gbc_BorrowBookID.insets = new Insets(0, 0, 5, 5);
+		gbc_BorrowBookID.fill = GridBagConstraints.HORIZONTAL;
+		gbc_BorrowBookID.gridx = 1;
+		gbc_BorrowBookID.gridy = 20;
+		contentPane.add(BorrowBookID, gbc_BorrowBookID);
+		BorrowBookID.setColumns(10);
+		
+		lblBookTitle = new JLabel("Book Title 1");
+		GridBagConstraints gbc_lblBookTitle = new GridBagConstraints();
+		gbc_lblBookTitle.insets = new Insets(0, 0, 5, 5);
+		gbc_lblBookTitle.anchor = GridBagConstraints.EAST;
+		gbc_lblBookTitle.gridx = 0;
+		gbc_lblBookTitle.gridy = 21;
+		contentPane.add(lblBookTitle, gbc_lblBookTitle);
+		
+		Book1 = new JTextField();
+		GridBagConstraints gbc_Book11 = new GridBagConstraints();
+		gbc_Book11.insets = new Insets(0, 0, 5, 5);
+		gbc_Book11.fill = GridBagConstraints.HORIZONTAL;
+		gbc_Book11.gridx = 1;
+		gbc_Book11.gridy = 21;
+		contentPane.add(Book1, gbc_Book11);
+		Book1.setColumns(10);
+		
+		lblBookTitle_1 = new JLabel("Book Title 2");
+		GridBagConstraints gbc_lblBookTitle_1 = new GridBagConstraints();
+		gbc_lblBookTitle_1.insets = new Insets(0, 0, 5, 5);
+		gbc_lblBookTitle_1.anchor = GridBagConstraints.EAST;
+		gbc_lblBookTitle_1.gridx = 0;
+		gbc_lblBookTitle_1.gridy = 22;
+		contentPane.add(lblBookTitle_1, gbc_lblBookTitle_1);
+		
+		Book2 = new JTextField();
+		GridBagConstraints gbc_Book21 = new GridBagConstraints();
+		gbc_Book21.insets = new Insets(0, 0, 5, 5);
+		gbc_Book21.fill = GridBagConstraints.HORIZONTAL;
+		gbc_Book21.gridx = 1;
+		gbc_Book21.gridy = 22;
+		contentPane.add(Book2, gbc_Book21);
+		Book2.setColumns(10);
+		
+		lblBookTitle_2 = new JLabel("Book Title 3");
+		GridBagConstraints gbc_lblBookTitle_2 = new GridBagConstraints();
+		gbc_lblBookTitle_2.insets = new Insets(0, 0, 0, 5);
+		gbc_lblBookTitle_2.anchor = GridBagConstraints.EAST;
+		gbc_lblBookTitle_2.gridx = 0;
+		gbc_lblBookTitle_2.gridy = 23;
+		contentPane.add(lblBookTitle_2, gbc_lblBookTitle_2);
+		
+		Book3 = new JTextField();
+		GridBagConstraints gbc_Book31 = new GridBagConstraints();
+		gbc_Book31.insets = new Insets(0, 0, 0, 5);
+		gbc_Book31.fill = GridBagConstraints.HORIZONTAL;
+		gbc_Book31.gridx = 1;
+		gbc_Book31.gridy = 23;
+		contentPane.add(Book3, gbc_Book31);
+		Book3.setColumns(10);
+		
+		btnNewButton = new JButton("Checkout Book ;)");
+//-------------------------------------------------------------------------------
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if (searchField.getText()!=""){ //searching for a book and retrieving the call number
+					Statement stmt = null;
+					Statement stmt2 = null;
+					Statement stmt3 = null;
+					
+					String bookTitle1 = Book1.getText();
+					String bookTitle2 = Book2.getText();
+					String bookTitle3 = Book3.getText();
+					
+					String borrowerNum = BorrowBookID.getText();
+					
+					int callNumber = 5;
+					
+					try {
+						stmt = con.createStatement();
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+					}
+					try {
+						ResultSet rs = stmt.executeQuery("SELECT title,callNumber FROM Book WHERE title LIKE '%" 
+								+ bookTitle1 + "%' OR title LIKE '%" + bookTitle2 + "%' OR title LIKE '%" 
+								+ bookTitle3 + "%'");
+
+						while ( rs.next() ) {
+							callNumber = rs.getInt("callNumber");
+
+						}
+
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+					}
+
+					//at this point, call number has been found for the book, now we must change the status to out
+
+					try {
+						stmt2 = con.createStatement();
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+					}
+
+					try {
+						stmt2.executeQuery("UPDATE BookCopy SET status=2 WHERE callNumber= " + callNumber + "");
+
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+					}
+					
+					//now attach the checked-out book to the borrower via the BID field. Create a row in Borrowing
+					
+					try {
+						stmt3 = con.createStatement();
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+					}
+					
+					int borid = 5;
+					int bid = Integer.parseInt(borrowerNum);
+					int bookNumber = callNumber;
+					int copyNumber = 1;
+					int outDate = 1;
+					int inDate = 2;
+
+					try {
+						stmt3.executeUpdate("INSERT INTO Borrowing VALUES (" + borid + "," + bid + ",'" + bookNumber + "','" + copyNumber + "'," + outDate + ",'" + inDate + "')");
+
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+					}
+				}
+			}
+		});
+//---------------------------------------------------------------------------------------------
+		
+
+		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
+		gbc_btnNewButton.gridx = 2;
+		gbc_btnNewButton.gridy = 23;
+		contentPane.add(btnNewButton, gbc_btnNewButton);
+
+		String yumiko = "^_^";
+		String alec = "awesome";
+		double alecawesome = 0.0;
+>>>>>>> branch 'master' of https://github.com/alecoc/cs304Project.git
 		
 		// anonymous inner class for closing the window
 		mainFrame.addWindowListener(new WindowAdapter() 
