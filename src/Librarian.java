@@ -8,7 +8,7 @@ public class Librarian {
     DONE: Adds a new book or new copy of an existing book to the library. The librarian provides the information for 
     the new book, and the system adds it to the library.
     
-    Generate a report with all the books that have been checked out. For each book the report shows the date 
+    Done (Without Table USe): Generate a report with all the books that have been checked out. For each book the report shows the date 
     it was checked out and the due date. 
     
     The system flags the items that are overdue. The items are ordered by the book call number.  If a subject 
@@ -59,11 +59,13 @@ public class Librarian {
 			
 	public List<Report> BookReport() {
 		List<Report> finalReport = new ArrayList<Report>();
-		for (Book b : ListOfBooks) {
+		for (Book b : ListOfBooks) { // these books are from the borrowing table
 			if (b.status == 2) {
-				// need to finish what to do when book is found
+				finalReport.add(new Report(bid, outDate, inDate)) 
 			}
 	}
 		return finalReport;
 	}
+	
+	public 
 }
