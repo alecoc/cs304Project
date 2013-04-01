@@ -94,6 +94,9 @@ public class GUI implements ActionListener
 	private JTextField bPublisherField;
 	private JTextField bSubjectField;
 	private JTextField bYearField;
+	
+	private JButton outReport;
+	
 
 
 
@@ -130,33 +133,6 @@ public class GUI implements ActionListener
 					ResultSet rs = stmt.executeQuery("SELECT title,mainAuthor,subject,callNumber FROM Book WHERE title LIKE '%" 
 							+ searchField.getText() + "%' OR mainAuthor LIKE '%" + searchField.getText() + "%' OR subject LIKE '%" 
 							+ searchField.getText() + "%'");
-					
-		searchButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				Statement stmt = null;
-				try {
-					stmt = con.createStatement();
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
-				try {
-					ResultSet rs = stmt.executeQuery("SELECT title,mainAuthor,subject,callNumber FROM Book WHERE title LIKE '%" 
-							+ searchField.getText() + "%' OR mainAuthor LIKE '%" + searchField.getText() + "%' OR subject LIKE '%" 
-							+ searchField.getText() + "%'");
-
-					while ( rs.next() ) {
-						int callNumber = rs.getInt("callNumber");
-						System.out.println(callNumber);
-					}
-
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
-			}
-		});
-
-		//--------------------------------------------------------------------------------		
-
 					while ( rs.next() ) {
 						int callNumber = rs.getInt("callNumber");
 						System.out.println(callNumber);
@@ -682,120 +658,120 @@ public class GUI implements ActionListener
 		
 		bCallNumber = new JLabel("Call Number");
 		GridBagConstraints gbc_bCallNumber = new GridBagConstraints();
-		gbc_lblName.insets = new Insets(0, 0, 5, 5);
-		gbc_lblName.anchor = GridBagConstraints.EAST;
-		gbc_lblName.gridx = 0;
-		gbc_lblName.gridy = 3;
+		gbc_bCallNumber.insets = new Insets(0, 0, 5, 5);
+		gbc_bCallNumber.anchor = GridBagConstraints.EAST;
+		gbc_bCallNumber.gridx = 0;
+		gbc_bCallNumber.gridy = 3;
 		contentPane.add(bCallNumber, gbc_bCallNumber);
 
 		bCallNumberField = new JTextField();
 		GridBagConstraints gbc_text = new GridBagConstraints();
-		gbc_textField.insets = new Insets(0, 0, 5, 5);
-		gbc_textField.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField.gridx = 1;
-		gbc_textField.gridy = 3;
+		gbc_text.insets = new Insets(0, 0, 5, 5);
+		gbc_text.fill = GridBagConstraints.HORIZONTAL;
+		gbc_text.gridx = 1;
+		gbc_text.gridy = 3;
 		contentPane.add(bCallNumberField, gbc_text);
 		nameField.setColumns(10);
 
 		bIsbn = new JLabel("ISBN");
 		GridBagConstraints gbc_bIsbn = new GridBagConstraints();
-		gbc_lblPassword.insets = new Insets(0, 0, 5, 5);
-		gbc_lblPassword.anchor = GridBagConstraints.EAST;
-		gbc_lblPassword.gridx = 0;
-		gbc_lblPassword.gridy = 4;
+		gbc_bIsbn.insets = new Insets(0, 0, 5, 5);
+		gbc_bIsbn.anchor = GridBagConstraints.EAST;
+		gbc_bIsbn.gridx = 0;
+		gbc_bIsbn.gridy = 4;
 		contentPane.add(bIsbn, gbc_bIsbn);
 
 		bIsbnField = new JTextField();
 		GridBagConstraints gbc_text_1 = new GridBagConstraints();
-		gbc_textField_1.insets = new Insets(0, 0, 5, 5);
-		gbc_textField_1.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField_1.gridx = 1;
-		gbc_textField_1.gridy = 4;
+		gbc_text_1.insets = new Insets(0, 0, 5, 5);
+		gbc_text_1.fill = GridBagConstraints.HORIZONTAL;
+		gbc_text_1.gridx = 1;
+		gbc_text_1.gridy = 4;
 		contentPane.add(bIsbnField, gbc_text_1);
 		passwirdField.setColumns(10);
 
 		bTitle = new JLabel("Title");
 		GridBagConstraints gbc_bTitle = new GridBagConstraints();
-		gbc_lblId.insets = new Insets(0, 0, 5, 5);
-		gbc_lblId.anchor = GridBagConstraints.EAST;
-		gbc_lblId.gridx = 0;
-		gbc_lblId.gridy = 5;
+		gbc_bTitle.insets = new Insets(0, 0, 5, 5);
+		gbc_bTitle.anchor = GridBagConstraints.EAST;
+		gbc_bTitle.gridx = 0;
+		gbc_bTitle.gridy = 5;
 		contentPane.add(bTitle, gbc_bTitle);
 
 		bTitleField = new JTextField();
 		GridBagConstraints gbc_text_2 = new GridBagConstraints();
-		gbc_textField_2.insets = new Insets(0, 0, 5, 5);
-		gbc_textField_2.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField_2.gridx = 1;
-		gbc_textField_2.gridy = 5;
+		gbc_text_2.insets = new Insets(0, 0, 5, 5);
+		gbc_text_2.fill = GridBagConstraints.HORIZONTAL;
+		gbc_text_2.gridx = 1;
+		gbc_text_2.gridy = 5;
 		contentPane.add(bTitleField, gbc_text_2);
 		IDField.setColumns(10);
 		
 		bMainAuthor = new JLabel("Main Author");
 		GridBagConstraints gbc_bMainAuthor = new GridBagConstraints();
-		gbc_lblId.insets = new Insets(0, 0, 5, 5);
-		gbc_lblId.anchor = GridBagConstraints.EAST;
-		gbc_lblId.gridx = 0;
-		gbc_lblId.gridy = 6;
+		gbc_bMainAuthor.insets = new Insets(0, 0, 5, 5);
+		gbc_bMainAuthor.anchor = GridBagConstraints.EAST;
+		gbc_bMainAuthor.gridx = 0;
+		gbc_bMainAuthor.gridy = 6;
 		contentPane.add(bMainAuthor, gbc_bMainAuthor);
 
 		bMainAuthorField = new JTextField();
 		GridBagConstraints gbc_text_3 = new GridBagConstraints();
-		gbc_textField_2.insets = new Insets(0, 0, 5, 5);
-		gbc_textField_2.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField_2.gridx = 1;
-		gbc_textField_2.gridy = 6;
-		contentPane.add(bMainAuthor, gbc_text_3);
+		gbc_text_3.insets = new Insets(0, 0, 5, 5);
+		gbc_text_3.fill = GridBagConstraints.HORIZONTAL;
+		gbc_text_3.gridx = 1;
+		gbc_text_3.gridy = 6;
+		contentPane.add(bMainAuthorField, gbc_text_3);
 		IDField.setColumns(10);
 		
 		bPublisher = new JLabel("Title");
 		GridBagConstraints gbc_bPublisher = new GridBagConstraints();
-		gbc_lblId.insets = new Insets(0, 0, 5, 5);
-		gbc_lblId.anchor = GridBagConstraints.EAST;
-		gbc_lblId.gridx = 0;
-		gbc_lblId.gridy = 7;
+		gbc_bPublisher.insets = new Insets(0, 0, 5, 5);
+		gbc_bPublisher.anchor = GridBagConstraints.EAST;
+		gbc_bPublisher.gridx = 0;
+		gbc_bPublisher.gridy = 7;
 		contentPane.add(bPublisher, gbc_bPublisher);
 
 		bPublisherField = new JTextField();
 		GridBagConstraints gbc_text_4 = new GridBagConstraints();
-		gbc_textField_2.insets = new Insets(0, 0, 5, 5);
-		gbc_textField_2.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField_2.gridx = 1;
-		gbc_textField_2.gridy = 7;
+		gbc_text_4.insets = new Insets(0, 0, 5, 5);
+		gbc_text_4.fill = GridBagConstraints.HORIZONTAL;
+		gbc_text_4.gridx = 1;
+		gbc_text_4.gridy = 7;
 		contentPane.add(bPublisherField, gbc_text_4);
 		IDField.setColumns(10);
 		
 		bSubject = new JLabel("Subject");
 		GridBagConstraints gbc_bSubject = new GridBagConstraints();
-		gbc_lblId.insets = new Insets(0, 0, 5, 5);
-		gbc_lblId.anchor = GridBagConstraints.EAST;
-		gbc_lblId.gridx = 0;
-		gbc_lblId.gridy = 8;
+		gbc_bSubject.insets = new Insets(0, 0, 5, 5);
+		gbc_bSubject.anchor = GridBagConstraints.EAST;
+		gbc_bSubject.gridx = 0;
+		gbc_bSubject.gridy = 8;
 		contentPane.add(bSubject, gbc_bSubject);
 
 		bSubjectField = new JTextField();
 		GridBagConstraints gbc_text_5 = new GridBagConstraints();
-		gbc_textField_2.insets = new Insets(0, 0, 5, 5);
-		gbc_textField_2.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField_2.gridx = 1;
-		gbc_textField_2.gridy = 8;
+		gbc_text_5.insets = new Insets(0, 0, 5, 5);
+		gbc_text_5.fill = GridBagConstraints.HORIZONTAL;
+		gbc_text_5.gridx = 1;
+		gbc_text_5.gridy = 8;
 		contentPane.add(bSubjectField, gbc_text_5);
 		IDField.setColumns(10);
 		
 		bYear = new JLabel("Year");
 		GridBagConstraints gbc_bYear = new GridBagConstraints();
-		gbc_lblId.insets = new Insets(0, 0, 5, 5);
-		gbc_lblId.anchor = GridBagConstraints.EAST;
-		gbc_lblId.gridx = 0;
-		gbc_lblId.gridy = 9;
+		gbc_bYear.insets = new Insets(0, 0, 5, 5);
+		gbc_bYear.anchor = GridBagConstraints.EAST;
+		gbc_bYear.gridx = 0;
+		gbc_bYear.gridy = 9;
 		contentPane.add(bYear, gbc_bYear);
 
 		bYearField = new JTextField();
 		GridBagConstraints gbc_text_6 = new GridBagConstraints();
-		gbc_textField_2.insets = new Insets(0, 0, 5, 5);
-		gbc_textField_2.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField_2.gridx = 1;
-		gbc_textField_2.gridy = 9;
+		gbc_text_6.insets = new Insets(0, 0, 5, 5);
+		gbc_text_6.fill = GridBagConstraints.HORIZONTAL;
+		gbc_text_6.gridx = 1;
+		gbc_text_6.gridy = 9;
 		contentPane.add(bYearField, gbc_text_6);
 		IDField.setColumns(10);
 		
@@ -857,8 +833,8 @@ public class GUI implements ActionListener
 
 //---------------------------------------------------------------------------
 	
-		bAddBook = new JButton("Print Books Out");
-		bAddBook.addActionListener(new ActionListener() {
+		outReport = new JButton("Print Books Out");
+		outReport.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {		
 				Statement stmt = null;
 				Statement stmt2 = null;
@@ -896,11 +872,11 @@ public class GUI implements ActionListener
 		contentPane.add(lblBorrowerid, gbc_lblBorrowerid);
 
 		finesBorrowerID = new JTextArea();
-		GridBagConstraints gbc_textArea = new GridBagConstraints();
-		gbc_textArea.insets = new Insets(0, 0, 5, 5);
-		gbc_textArea.fill = GridBagConstraints.BOTH;
-		gbc_textArea.gridx = 1;
-		gbc_textArea.gridy = 18;
+		GridBagConstraints gbc_textArea2 = new GridBagConstraints();
+		gbc_textArea2.insets = new Insets(0, 0, 5, 5);
+		gbc_textArea2.fill = GridBagConstraints.BOTH;
+		gbc_textArea2.gridx = 1;
+		gbc_textArea2.gridy = 18;
 		contentPane.add(finesBorrowerID, gbc_textArea);
 		
 		lblBorrowBooks = new JLabel("Borrow Books");
@@ -1067,10 +1043,6 @@ public class GUI implements ActionListener
 		gbc_btnNewButton.gridy = 23;
 		contentPane.add(btnNewButton, gbc_btnNewButton);
 
-		String yumiko = "^_^";
-		String alec = "awesome";
-		double alecawesome = 0.0;
-		
 		// anonymous inner class for closing the window
 		mainFrame.addWindowListener(new WindowAdapter() 
 		{
