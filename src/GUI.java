@@ -809,6 +809,8 @@ public class GUI implements ActionListener
 				
 				try {
 					stmt = con.createStatement();
+					stmt2 = con.createStatement();
+					stmt3 = con.createStatement();
 				} catch (SQLException e1) {
 					e1.printStackTrace();
 				}
@@ -853,9 +855,36 @@ public class GUI implements ActionListener
 		});
 
 
-		//---------------------------------------------------------------------------
+//---------------------------------------------------------------------------
 	
-		//---------------------------------------------------------------------------	
+		bAddBook = new JButton("Print Books Out");
+		bAddBook.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {		
+				Statement stmt = null;
+				Statement stmt2 = null;
+				Statement stmt3 = null;
+				
+				try {
+					stmt = con.createStatement();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+
+				try {
+					ResultSet rs = stmt.executeQuery("SELECT bid,outDate,inDate FROM Borrowing");
+					while ( rs.next() ) {
+						int callNumber = rs.getInt("bid");
+						String inDate = rs.getString("inDate");
+						String outDate = rs.getString("outDate");
+						System.out.println("Book ID: " + callNumber + " :: Date Out: " + outDate + " :: Date Due: " + inDate);
+					}
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+							
+//---------------------------------------------------------------------------	
 		
 		String yumiko = "^_^";
 		String alec = "awesome";
@@ -949,8 +978,10 @@ public class GUI implements ActionListener
 		contentPane.add(Book3, gbc_Book31);
 		Book3.setColumns(10);
 		
+
+//-------------------------------------------------------------------------------	
+		
 		btnNewButton = new JButton("Checkout Book ;)");
-//-------------------------------------------------------------------------------
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (searchField.getText()!=""){ //searching for a book and retrieving the call number
@@ -1024,6 +1055,10 @@ public class GUI implements ActionListener
 				}
 			}
 		});
+	
+//---------------------------------------------------------------------------------------------
+		
+
 //---------------------------------------------------------------------------------------------
 		
 
