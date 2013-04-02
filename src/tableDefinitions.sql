@@ -30,6 +30,7 @@ CREATE TABLE Book (
       publisher varchar(20),
       subject varchar(20),
       year int,
+      timesOut int,
       PRIMARY KEY(callNumber)
 );
 

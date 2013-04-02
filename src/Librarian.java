@@ -24,17 +24,5 @@ public class Librarian {
 	public Librarian (Borrower b) {
 		// Maybe make Librarian like borrower
 	}
- 
-			
-	public List<Report> BookReport() {
-		List<Report> finalReport = new ArrayList<Report>();
-		for (Book b : ListOfBooks) { // these books are from the borrowing table
-			if (b.status == 2) {
-				finalReport.add(new Report(bid, outDate, inDate)) 
-			}
-	}
-		return finalReport;
-	}
-	
-	public 
+
 }

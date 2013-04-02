@@ -96,6 +96,7 @@ public class GUI implements ActionListener
 	private JTextField bYearField;
 	
 	private JButton outReport;
+	private JButton popularReport;
 	
 
 
@@ -810,7 +811,7 @@ public class GUI implements ActionListener
 						
 						if (maxCopy > 0) {
 							try {
-								stmt2.executeUpdate("INSERT INTO Book VALUES (" + callNumber + "," + isbn + ",'" + title + "','" + mainAuthor + "','" + publisher + "','" + subject + "'," + ")");
+								stmt2.executeUpdate("INSERT INTO Book VALUES (" + callNumber + "," + isbn + ",'" + title + "','" + mainAuthor + "','" + publisher + "','" + subject + "'," + year + "," + 0 + ")");
 
 							} catch (SQLException e1) {
 								e1.printStackTrace();
@@ -837,8 +838,6 @@ public class GUI implements ActionListener
 		outReport.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {		
 				Statement stmt = null;
-				Statement stmt2 = null;
-				Statement stmt3 = null;
 				
 				try {
 					stmt = con.createStatement();
@@ -859,6 +858,40 @@ public class GUI implements ActionListener
 				}
 			}
 		});
+							
+//---------------------------------------------------------------------------	
+		
+		popularReport = new JButton("Print Books Out");
+		popularReport.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {	
+				ArrayList<Report> outBooks = new ArrayList<Report>();
+				Statement stmt = null;
+				
+				try {
+					stmt = con.createStatement();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+
+				try {
+					ResultSet rs = stmt.executeQuery("SELECT timesOut,title,mainAuthor FROM Books WHERE timesOut > 0");
+					while ( rs.next() ) {
+						String title = rs.getString("title");
+						String mainAuthor = rs.getString("mainAuthor");
+						int timesOut = rs.getInt("timesOut");
+						outBooks.add(new Report(timesOut, mainAuthor, title));
+					}
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+				
+				outBooks = sortBooks(outBooks);
+				for (Report r : outBooks) {
+					System.out.println("Times out: " + r.timeOut + " Title: " + r.title + " Author: " + r.mainAuthor);
+				}
+			}
+		});
+	
 							
 //---------------------------------------------------------------------------	
 		
@@ -1076,6 +1109,36 @@ public class GUI implements ActionListener
 			System.out.println("Message: " + ex.getMessage());
 			System.exit(-1);
 		}
+	}
+
+
+	protected ArrayList<Report> sortBooks(ArrayList<Report> outBooks) {
+		if(1 >= outBooks.size()) { 
+			return outBooks;
+			}
+		ArrayList<Report> bleft = (ArrayList<Report>) outBooks.subList(0, (outBooks.size() / 2) - 1);
+		ArrayList<Report> bright = (ArrayList<Report>) outBooks.subList(bleft.size() - 1, outBooks.size() -1);
+		bleft = sortBooks(bleft);
+		bright = sortBooks(bright);
+		
+		return mergeSort(bleft, bright);	
+	}
+
+
+	private ArrayList<Report> mergeSort(ArrayList<Report> bleft, ArrayList<Report> bright) {
+		ArrayList<Report> blist = new ArrayList(bleft.size() + bright.size());
+		int bL = 0;
+		int bR = 0;
+		
+		for (int i = 0; i < blist.size(); i++) {
+			if (bL < bleft.size() && (bR >+ bright.size() || bleft.get(bL).timeOut <= bright.get(bR).timeOut)) {
+				blist.set(i, bleft.get(bL));
+			} else {
+				blist.set(i, bright.get(bR));
+			}
+			
+		}
+		return blist;
 	}
 
 
@@ -1457,9 +1520,23 @@ public class GUI implements ActionListener
 		}	
 	}
 
+	private class Report{
+		
+		private String title;
+		private String mainAuthor;
+		private int timeOut;
+		
+		public Report(int timeOut, String mainAuthor, String title) {
+			this.timeOut = timeOut;
+			this.mainAuthor = mainAuthor;
+			this.title = title;
+		}
+	}
 
 	public static void main(String args[])
 	{
 		GUI dc = new GUI();
 	}
+	
+
 }
